@@ -1,58 +1,72 @@
 ﻿using System.Collections.Generic;
 
-//Console.WriteLine("What is your name?");
-//string name = Console.ReadLine();
-//DateTime date = DateTime.UtcNow;
-//Console.WriteLine($"Hello {name}. It's {date.DayOfWeek}. Welcome to the math game.\n");
+DateTime date = DateTime.UtcNow;
+string? name = GetName();
+int highScore = 0;
 
-while (true)
+string GetName()
 {
-    
-    Console.WriteLine($@"Choose a game:
+    Console.WriteLine("What is your name?");
+    string name = Console.ReadLine();
+    return name;
+}
+void menu(string name)
+{
+    while (true)
+    {
+        Console.Clear();
+        Console.WriteLine($"Previous High Score: {highScore}");
+        Console.WriteLine($"Hello {name}. It's {date.DayOfWeek}. Welcome to the math game.\n");
+        Console.WriteLine($@"Choose a game:
     A - Addition
     S - Subtraction
     M - Multiplication
     D - Division
     Q - Quit the program");
 
-    string gameSelected = Console.ReadLine().ToUpper().Trim();
+        string gameSelected = Console.ReadLine().ToUpper().Trim();
 
-    switch (gameSelected)
-    {
-        case "A":
-            Console.WriteLine("Addition game selected");
-            StartGame("+");
-            break;
-        case "S":
-            Console.WriteLine("Subtraction game selected");
-            StartGame("-");
-            break;
-        case "M":
-            Console.WriteLine("Multiplication game selected");
-            StartGame("*");
-            break;
-        case "D":
-            Console.WriteLine("Division game selected");
-            StartGame("/");
-            break;
-        case "Q":
-            Console.WriteLine("Goodbye");
-            Environment.Exit(0);
-            break;
-        default:
-            Console.WriteLine("Invalid selection");
-            break;
+        switch (gameSelected)
+        {
+            case "A":
+                Console.WriteLine("Addition game selected");
+                StartGame("+");
+                break;
+            case "S":
+                Console.WriteLine("Subtraction game selected");
+                StartGame("-");
+                break;
+            case "M":
+                Console.WriteLine("Multiplication game selected");
+                StartGame("*");
+                break;
+            case "D":
+                Console.WriteLine("Division game selected");
+                StartGame("/");
+                break;
+            case "Q":
+                Console.WriteLine("\nGoodbye!");
+                Environment.Exit(0);
+                break;
+            default:
+                Console.Clear();
+                Console.WriteLine("Invalid selection!\n");
+                break;
+        }
     }
 }
-
 void StartGame(string mathOperator)
 {
+
+    int score = 0;
+    int count = 0;
+
     Console.WriteLine("\nEnter 'q' to return to the menu at anytime");
     Random random = new();
-    while (true)
+    while (count < 5)
     {
-        int number1;
-        int number2;
+        
+        int number1, number2;
         if (mathOperator == "-")
         {
             number1 = random.Next(1, 20);
@@ -86,7 +100,7 @@ void StartGame(string mathOperator)
                 break;
         }
 
-        Console.WriteLine($"\nWhat is {number1} {mathOperator} {number2}?");
+        Console.WriteLine($"What is {number1} {mathOperator} {number2}?");
         
         string userAnswer = Console.ReadLine();
         double number;
@@ -94,11 +108,14 @@ void StartGame(string mathOperator)
         {
             if (number == actualAnswer)
             {
-                Console.WriteLine("That's correct!");
+                Console.WriteLine("That's correct!\n");
+                score++;
+                count++;
             }
             else
             {
-                Console.WriteLine("That's NOT correct!");
+                count++;
+                Console.WriteLine("That's NOT correct!\n");
             }
         }
         else if (userAnswer.ToUpper().Trim() == "Q")
@@ -108,6 +125,20 @@ void StartGame(string mathOperator)
             Console.Clear();
             break;
         }
+        else
+        {
+            Console.WriteLine("Invalid entry, you lose a turn..\n");
+            count++;
+        }
 
     }
+    if (score > highScore) 
+    { 
+        highScore = score;
+    }
+    Console.WriteLine($"Your score was {score}!\n");
+    Console.WriteLine("Press ENTER to return to the menu..");
+    Console.ReadLine();
 }
+
+menu(name);
