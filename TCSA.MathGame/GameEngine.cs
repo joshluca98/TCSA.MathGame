@@ -37,8 +37,6 @@ internal class GameEngine
                     break;
                 case "/":
                     gameType = "Division";
-                    //number2 = random.Next(1, 11);
-                    //number1 = number2 * random.Next(1, 11);
                     while (number1 % number2 != 0)
                     {
                         number1 = random.Next(1, 101);
