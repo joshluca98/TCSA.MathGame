@@ -1,11 +1,9 @@
 ﻿namespace TCSA.MathGame;
-using TCSA.MathGame;
-
 internal class Menu
 {
     DateTime date = DateTime.UtcNow;
     GameEngine GameEngine = new();
-    
+
     static string? name = GetName();
     static string GetName()
     {
@@ -13,7 +11,7 @@ internal class Menu
         string name = Console.ReadLine();
         return name;
     }
-    
+
     internal void DisplayMenu()
     {
         while (true)
@@ -56,7 +54,7 @@ internal class Menu
                 case "V":
                     Console.Clear();
                     Console.WriteLine("Viewing Previous Scores");
-                    GameEngine.ViewScores();
+                    Helpers.ViewScores();
                     Console.ReadLine();
                     break;
                 case "Q":
