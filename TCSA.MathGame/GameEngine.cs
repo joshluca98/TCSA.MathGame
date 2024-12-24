@@ -41,8 +41,8 @@ internal class GameEngine
                     //number1 = number2 * random.Next(1, 11);
                     while (number1 % number2 != 0)
                     {
-                        number1 = random.Next(1, 99);
-                        number2 = random.Next(2, 99);
+                        number1 = random.Next(1, 101);
+                        number2 = random.Next(2, 101);
                     }
                     actualAnswer = number1 / number2;
                     break;
